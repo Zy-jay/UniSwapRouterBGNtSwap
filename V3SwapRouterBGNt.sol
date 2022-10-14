@@ -40,46 +40,6 @@ contract Swap {
         TransferHelper.safeApprove(token, routerAddress, amountIn);
     }
 
-    function swapExactInputSingle(uint256 amountIn, address token)
-        external
-        returns (uint256 amountOut)
-    {
-        safeTransferWithApprove(amountIn, EURT, address(swapRouter));
-
-        ISwapRouter.ExactInputSingleParams memory params = ISwapRouter
-            .ExactInputSingleParams({
-                tokenIn: EURT,
-                tokenOut: token,
-                fee: 3000,
-                recipient: msg.sender,
-                deadline: block.timestamp,
-                amountIn: amountIn,
-                amountOutMinimum: 0,
-                sqrtPriceLimitX96: 0
-            });
-
-        amountOut = swapRouter.exactInputSingle(params);
-    }
-
-    function swapExactInputSingle02(uint256 amountIn, address token)
-        external
-        returns (uint256 amountOut)
-    {
-        safeTransferWithApprove(amountIn, EURT, address(swapRouter02));
-
-        IV3SwapRouter.ExactInputSingleParams memory params = IV3SwapRouter
-            .ExactInputSingleParams({
-                tokenIn: EURT,
-                tokenOut: token,
-                fee: 3000,
-                recipient: msg.sender,
-                amountIn: amountIn,
-                amountOutMinimum: 0,
-                sqrtPriceLimitX96: 0
-            });
-
-        amountOut = swapRouter02.exactInputSingle(params);
-    }
 
 function swapExactInputSingle02BGNtToToken(uint256 amountIn, address token)
         external
